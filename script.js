@@ -201,3 +201,52 @@ $phone.addEventListener("input", (event) => {
     event.target.value = event.target.value.slice(0, 9);
   }
 });
+
+
+let carPrice = 0;
+let accessoryPrice = 0;
+let carAccessoryPrice = 0;
+
+$accessories.forEach((accessory) => {
+  accessory.addEventListener("change", () => {
+    if (accessory.checked) {
+      accessoryPrice += parseInt(accessory.value);
+    } else {
+      accessoryPrice -= parseInt(accessory.value);
+    }
+    summaryCarAccessoryPrice();
+  });
+});
+
+function summaryCarAccessoryPrice() {
+  const chosenCar = document.querySelector(".carActive");
+  if (chosenCar) {
+    carPrice = parseInt(
+      chosenCar.querySelector("p:nth-child(8) b").textContent
+    );
+  }
+  carAccessoryPrice = carPrice + accessoryPrice;
+  $summaryPrice.value = carAccessoryPrice;
+}
+
+carAll.forEach((car) => {
+  car.addEventListener("click", () => {
+    carAll.forEach((car) => {
+      car.style.display = "none";
+    });
+    car.style.display = "block";
+    car.classList.add("carActive");
+
+    const activeCarImg = car.getElementsByTagName("img")[0].src;
+    summaryImg.src = activeCarImg;
+    summaryImg.addEventListener("load", () => {
+      summaryImg.style.display = "block";
+    });
+
+    summaryCarAccessoryPrice();
+
+    $header.style.display = "block";
+    $headerText1.style.display = "none";
+    $headerText2.innerHTML = "<h1>Wybrałeś samochód:</h1>";
+  });
+});
