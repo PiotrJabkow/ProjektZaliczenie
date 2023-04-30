@@ -148,3 +148,56 @@ cars.forEach((car) => {
   $carsTable.appendChild(carDiv);
 });
 
+const $middle = document.getElementById("middle");
+const $form = document.getElementById("form");
+const $fName = document.getElementById("fName");
+const $phone = document.getElementById("phone");
+const $dateD = document.getElementById("dateD");
+const chosenCar = document.querySelector("carActive");
+const $choseCar = document.getElementById("choseCar");
+const $header = document.getElementById("header");
+const $headerText1 = document.getElementById("headerText1");
+const $headerText2 = document.getElementById("headerText2");
+const $accessories = document.querySelectorAll('input[name="accessories"]');
+const $summaryPrice = document.getElementById("summaryPrice");
+const summaryPriceEnd = document.getElementById("summaryPriceEnd");
+const summaryImg = document.getElementById("summaryImg");
+const carAll = document.querySelectorAll(".carL");
+const $backBtn = document.getElementById("backBtn");
+const $summaryBtn = document.getElementById("summaryBtn");
+const $summaryEnd = document.getElementById("summaryEnd");
+const $finance = document.querySelectorAll('input[name="finance"]');
+
+$carsTable.addEventListener("click", function () {
+  $middle.style.display = "block";
+});
+
+$form.addEventListener("submit", (event) => {
+  let mistakes = [];
+  if ($fName.value === "") {
+    mistakes.push("Proszę wpisać imię i nazwisko.");
+  }
+  if ($phone.value === "") {
+    mistakes.push("Proszę wprowadzić numer telefonu.");
+  }
+  if ($dateD.value === "") {
+    mistakes.push("Proszę wybierz datę dostawy.");
+  }
+  if (mistakes.length > 0) {
+    event.preventDefault();
+    let $mistakesParag = document.querySelector("#mistakes");
+    $mistakesParag.innerHTML = `Wystąpił błąd. <br /> ${mistakes.join(
+      "<br />"
+    )}`;
+  } else {
+    event.preventDefault();
+
+  }
+});
+
+$phone.addEventListener("input", (event) => {
+  event.target.value = event.target.value.replace(/[^0-9]/g, "");
+  if (event.target.value.length > 9) {
+    event.target.value = event.target.value.slice(0, 9);
+  }
+});
