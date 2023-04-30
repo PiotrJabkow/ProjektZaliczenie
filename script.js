@@ -250,3 +250,16 @@ carAll.forEach((car) => {
     $headerText2.innerHTML = "<h1>Wybrałeś samochód:</h1>";
   });
 });
+
+
+
+$backBtn.addEventListener("click", () => {
+  carAll.forEach((carAll) => {
+    carAll.style.display = "block";
+    $middle.style.display = "none";
+    $headerText1.style.display = "block";
+    $headerText2.style.display = "none";
+  });
+  location.reload(true);
+});
+
