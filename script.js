@@ -270,3 +270,27 @@ $finance.forEach((radioBtn) => {
     document.querySelector("#finance\\.value").textContent = selectedValue;
   });
 });
+
+
+$summaryBtn.addEventListener("click", () => {
+  const carAccessoryPrice = parseInt($summaryPrice.value);
+  document.querySelector("#summaryPriceEnd\\.value").textContent =
+    carAccessoryPrice;
+});
+
+$summaryBtn.addEventListener("click", () => {
+  $header.style.display = "none";
+  $carsTable.style.display = "none";
+  $middle.style.display = "none";
+  $summaryEnd.style.display = "block";
+
+  carAll.forEach((car) => {
+    if (car.classList.contains("carActive")) {
+      brand = car.querySelector("h3").textContent;
+      year = car.querySelector("p:nth-child(3) b").textContent;
+      model = car.querySelector("p:nth-child(4) b").textContent;
+
+      $choseCar.textContent = `Wybrałeś: ${brand}, ${model}. Rok produkcji: ${year}.`;
+    }
+  });
+});
