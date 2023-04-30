@@ -111,3 +111,40 @@ const cars = [
     "https://images.pexels.com/photos/12765641/pexels-photo-12765641.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   ),
 ];
+
+
+const $carsTable = document.getElementById("carsTable");
+cars.forEach((car) => {
+  const carDiv = document.createElement("div");
+  carDiv.classList.add("carL");
+  carDiv.setAttribute("id", car.id);
+
+  const carImg = document.createElement("img");
+  carImg.src = car.image;
+  const carBrand = document.createElement("h3");
+  carBrand.innerHTML = car.brand;
+  const carYear = document.createElement("p");
+  carYear.innerHTML = `Rok produkcji samochodu: <b> ${car.year} </b>`;
+  const carModel = document.createElement("p");
+  carModel.innerHTML = `Model samochodu: <b> ${car.model}</b>`;
+  const carMileage = document.createElement("p");
+  carMileage.innerHTML = `Przebieg samochodu: <b> ${car.mileage} km</b>`;
+  const carengineCapacity = document.createElement("p");
+  carengineCapacity.innerHTML = `Pojemność silnika samochodu: <b> ${car.engineCapacity} </b>`;
+  const carenginePower = document.createElement("p");
+  carenginePower.innerHTML = `Moc silnika samochodu: <b> ${car.enginePower} kW</b>`;
+  const carPrice = document.createElement("p");
+  carPrice.innerHTML = `Cena samochodu: <b> ${car.price} zł </b>`;
+
+  carDiv.appendChild(carImg);
+  carDiv.appendChild(carBrand);
+  carDiv.appendChild(carYear);
+  carDiv.appendChild(carModel);
+  carDiv.appendChild(carMileage);
+  carDiv.appendChild(carengineCapacity);
+  carDiv.appendChild(carenginePower);
+  carDiv.appendChild(carPrice);
+
+  $carsTable.appendChild(carDiv);
+});
+
