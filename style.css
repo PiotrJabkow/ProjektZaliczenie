@@ -36,3 +36,85 @@ h1 {
   float: right;
   padding: 0;
 }
+
+.hidden {
+  display: none;
+}
+
+#middle {
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 15px 0px 15px 10px;
+  background-color: #e0a3a3;
+  font-weight: bold;
+  z-index: 9999;
+}
+
+#chosen {
+  width: 40%;
+  font-weight: lighter;
+}
+#chosen img {
+  height: 40%;
+  width: 40%;
+  float: right;
+  padding: 0;
+}
+
+#formView {
+  z-index: 999;
+  width: 50%;
+}
+
+input[type=radio] {
+  margin: 5px;
+}
+
+input[type=text], input[type=date], input[type=tel] {
+  width: 40%;
+  padding: 10px 15px;
+  border: 1px solid #456923;
+  border-radius: 3px;
+  box-sizing: border-box;
+  margin: 5px;
+}
+
+input[type=submit] {
+  padding: 5px 15px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.clear {
+  clear: both !important;
+}
+
+h2{
+  margin: 3px;
+}
+
+#mistakes {
+  font-size: 14px;
+}
+
+#label.accesories {
+  font-weight: bold;
+}
+
+
+#summaryEnd {
+  display: none;
+  background-color: bisque;
+  padding-left: 5px;
+}
+
+#summaryEnd img {
+  height: 210px;
+  width: 210px;
+  border: 3px solid #e0a3a3;
+}
