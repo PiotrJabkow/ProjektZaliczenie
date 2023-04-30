@@ -4,10 +4,103 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wozek</title>
+    <title>Autko</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer async></script>
   </head>
   <body>
-    <nav></nav>
-    <header>Marka: wyszukaj? :)</header>
+    <header id="header">
+      <p id="headerText1">
+        <marquee><h1>Komis Autko Zaprasza</h1></marquee>
+      </p>
+      <p id="headerText2"></p>
+    </header>
+    <nav>
+      <div id="listView" class="hidden">
+        
+
+      </div>
+    </nav>
+
+
+   <section class="carsView">
+      <div id="carsTable" class="carDiv"></div>
+    </section>
+
+
+    <div id="middle" class="hidden">
+      <div id="formView">
+        <form id="form">
+          <h2>Dokonaj zamówienia:</h2>
+          <div class="finance">
+            <label>Wybierz sposób finansowania:</label><br />
+            <input type="radio" id="leasing" name="finance" value="leasing" />
+            <label for="leasing">Leasing</label><br />
+            <input type="radio" id="cash" name="finance" value="gotówka" />
+            <label for="cash">Gotówka</label><br />
+          </div>
+          <br />
+          
+          <div class="naPhDa">
+            <label for="fName">Podaj dane przyszłego właściciela:</label><br />
+            <input
+              type="text"
+              id="fName"
+              name="imienazwisko"
+              placeholder="Wpisz tutaj imię 'spacja' nazwisko"
+              pattern="[A-Za-z]+\s[A-Za-z]+"
+            /><br />
+            <label for="phone">Numer telefonu:</label><br />
+            <input
+              type="tel"
+              id="phone"
+              name="telefon"
+              placeholder="Wpowadź tutaj numer telefonu"
+              pattern="[0-9]{9}"
+            /><br />
+            <label>Wybierz datę dostawy:</label><br />
+            <input type="date" id="dateD" name="dataDostawy" /><br />
+            <p id="mistakes"></p>
+          </div>
+          <br />
+
+          <div class="accessories">
+            <label for="accessories"><b>Wybierz dodatkowe akcesoria:</b></label
+            ><br />
+            <input type="checkbox" id="tires" name="accessories" value="1750" />
+            <label for="tires">Opony letnie: 1750 zł</label><br />
+
+            <input type="checkbox" id="bass" name="accessories" value="2400" />
+            <label for="bass">System audio-bass: 2400 zł</label><br />
+
+            <input type="checkbox" id="case" name="accessories" value="250" />
+            <label for="case">Pokrowiec na kierownicę ze skóry: 250 zł</label
+            ><br /><br />
+
+            <label for="summaryPrice">Cena całkowita:</label><br />
+            <input type="text" id="summaryPrice" value="0" disabled />
+          </div>
+          <br />
+          <div class="button">
+            <button id="summaryBtn" type="submit" value="buy">Zakup</button>
+            <br /><br />
+          </div>
+        </form>
+      </div>
+
+      <div class="button">
+        <button id="backBtn" type="submit" value="back">
+            Wróć do listy samachodów
+        </button>
+      </div>
+    </div>
+
+    <footer id="summaryEnd">
+      <h1>Dziękujemy za zakup auta!</h1>
+      <div id="choseCar"></div>
+      <p>Wybrana metoda płatności: <strong id="finance.value"></strong></p>
+      <p>Cena całkowita: <strong id="summaryPriceEnd.value"> </strong> </p>
+      <img id="summaryImg" src="" />
+    </footer>
   </body>
 </html>
