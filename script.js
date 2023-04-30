@@ -263,3 +263,10 @@ $backBtn.addEventListener("click", () => {
   location.reload(true);
 });
 
+
+$finance.forEach((radioBtn) => {
+  radioBtn.addEventListener("change", (event) => {
+    const selectedValue = event.target.value;
+    document.querySelector("#finance\\.value").textContent = selectedValue;
+  });
+});
