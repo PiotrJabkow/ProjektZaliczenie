@@ -54,16 +54,6 @@ h1 {
   z-index: 9999;
 }
 
-#chosen {
-  width: 40%;
-  font-weight: lighter;
-}
-#chosen img {
-  height: 40%;
-  width: 40%;
-  float: right;
-  padding: 0;
-}
 
 #formView {
   z-index: 999;
@@ -75,8 +65,8 @@ input[type=radio] {
 }
 
 input[type=text], input[type=date], input[type=tel] {
-  width: 40%;
-  padding: 10px 15px;
+  width: 50%;
+  padding: 5px 5px;
   border: 1px solid #456923;
   border-radius: 3px;
   box-sizing: border-box;

@@ -282,6 +282,7 @@ $summaryBtn.addEventListener("click", () => {
   $header.style.display = "none";
   $carsTable.style.display = "none";
   $middle.style.display = "none";
+  
   $summaryEnd.style.display = "block";
 
   carAll.forEach((car) => {
