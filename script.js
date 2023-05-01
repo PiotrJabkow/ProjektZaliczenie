@@ -1,3 +1,5 @@
+// clasa Car i tablica z samochodami
+
 class Car {
   id;
   brand;
@@ -148,6 +150,8 @@ cars.forEach((car) => {
   $carsTable.appendChild(carDiv);
 });
 
+// zmienne
+
 const $middle = document.getElementById("middle");
 const $form = document.getElementById("form");
 const $fName = document.getElementById("fName");
@@ -163,14 +167,65 @@ const $summaryPrice = document.getElementById("summaryPrice");
 const summaryPriceEnd = document.getElementById("summaryPriceEnd");
 const summaryImg = document.getElementById("summaryImg");
 const carAll = document.querySelectorAll(".carL");
+const formView = document.getElementById("formView");
 const $backBtn = document.getElementById("backBtn");
 const $summaryBtn = document.getElementById("summaryBtn");
 const $summaryEnd = document.getElementById("summaryEnd");
 const $finance = document.querySelectorAll('input[name="finance"]');
+const $mistakesParag = document.querySelector("#mistakes");
+const $listView = document.getElementById("listView");
+const $listBrand = document.querySelectorAll(".carL h3");
+const $selectBrand = document.getElementById("selectBrand");
+
+
+// wyszukiwanie, wybór marki
+
+  $listBrand.forEach(car => {
+  const brand = car.textContent.trim();
+
+  const optionBrand = $selectBrand.querySelector(`[value="${brand}"]`);
+  if (!optionBrand) {
+    const option = document.createElement("option");
+    option.value = brand;
+    option.text = brand;
+    $selectBrand.appendChild(option);
+  }
+});
+
+
+$selectBrand.addEventListener("change", () => {
+    const selectedBrand = $selectBrand.value;
+    carAll.forEach((car) => {
+      if (selectedBrand === "all" || car.querySelector("h3").textContent.trim() === selectedBrand) {
+        car.style.display = "block";
+      } else {
+        car.style.display = "none";
+      }
+    });
+  });
+
+
 
 $carsTable.addEventListener("click", function () {
   $middle.style.display = "block";
 });
+
+
+$form.addEventListener("submit", (event) => {
+  const formSave = new FormData(event.target);
+  localStorage.setItem("formData", JSON.stringify(Object.fromEntries(formSave.entries())));
+});
+
+const formSaved = JSON.parse(localStorage.getItem("formData"));
+  if (formSaved) {
+    for (const [name, value] of Object.entries(formSaved)) {
+      const input = $form.querySelector(`[name="${name}"]`);
+      if (input) {
+        input.value = value;
+      }
+    }
+}
+
 
 $form.addEventListener("submit", (event) => {
   let mistakes = [];
@@ -202,6 +257,8 @@ $phone.addEventListener("input", (event) => {
   }
 });
 
+
+// akcesoria, kwoty, zdjęcie
 
 let carPrice = 0;
 let accessoryPrice = 0;
@@ -248,21 +305,12 @@ carAll.forEach((car) => {
     $header.style.display = "block";
     $headerText1.style.display = "none";
     $headerText2.innerHTML = "<h1>Wybrałeś samochód:</h1>";
+    $listView.style.display = "none";
   });
 });
 
 
-
-$backBtn.addEventListener("click", () => {
-  carAll.forEach((carAll) => {
-    carAll.style.display = "block";
-    $middle.style.display = "none";
-    $headerText1.style.display = "block";
-    $headerText2.style.display = "none";
-  });
-  location.reload(true);
-});
-
+// pobranie wyboru sposobu płatności i ceny całkowitej
 
 $finance.forEach((radioBtn) => {
   radioBtn.addEventListener("change", (event) => {
@@ -295,3 +343,26 @@ $summaryBtn.addEventListener("click", () => {
     }
   });
 });
+
+// warunek daty
+
+const $today = new Date();
+const $maxDate = new Date($today.setDate($today.getDate() + 14)).toISOString().split("T")[0];
+
+$dateD.setAttribute("min", new Date().toISOString().split("T")[0]);
+$dateD.setAttribute("max", $maxDate);
+
+// przycisk powrotu
+
+$backBtn.addEventListener("click", () => {
+  carAll.forEach((carAll) => {
+    carAll.style.display = "block";
+    $middle.style.display = "none";
+    $headerText1.style.display = "block";
+    $headerText2.style.display = "none";
+    $listView.style.display = "block";
+  });
+  location.reload(true);
+});
+
+
