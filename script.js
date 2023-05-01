@@ -180,9 +180,8 @@ const $selectBrand = document.getElementById("selectBrand");
 
 // wyszukiwanie, wybór marki
 
-  $listBrand.forEach(car => {
+$listBrand.forEach(car => {
   const brand = car.textContent.trim();
-
   const optionBrand = $selectBrand.querySelector(`[value="${brand}"]`);
   if (!optionBrand) {
     const option = document.createElement("option");
@@ -194,15 +193,15 @@ const $selectBrand = document.getElementById("selectBrand");
 
 
 $selectBrand.addEventListener("change", () => {
-    const selectedBrand = $selectBrand.value;
-    carAll.forEach((car) => {
-      if (selectedBrand === "all" || car.querySelector("h3").textContent.trim() === selectedBrand) {
-        car.style.display = "block";
-      } else {
-        car.style.display = "none";
-      }
-    });
+  const selectedBrand = $selectBrand.value;
+  carAll.forEach((car) => {
+    if (selectedBrand === "all" || car.querySelector("h3").textContent.trim() === selectedBrand) {
+      car.style.display = "block";
+    } else {
+      car.style.display = "none";
+    }
   });
+});
 
 
 
@@ -217,13 +216,13 @@ $form.addEventListener("submit", (event) => {
 });
 
 const formSaved = JSON.parse(localStorage.getItem("formData"));
-  if (formSaved) {
-    for (const [name, value] of Object.entries(formSaved)) {
-      const input = $form.querySelector(`[name="${name}"]`);
-      if (input) {
-        input.value = value;
-      }
+if (formSaved) {
+  for (const [name, value] of Object.entries(formSaved)) {
+    const input = $form.querySelector(`[name="${name}"]`);
+    if (input) {
+      input.value = value;
     }
+  }
 }
 
 
@@ -267,7 +266,7 @@ carAll.forEach((car) => {
     const activeCarImg = car.getElementsByTagName("img")[0].src;
     summaryImg.src = activeCarImg;
     summaryImg.addEventListener("load", () => {
-      summaryImg.style.display = "block";
+    summaryImg.style.display = "block";
     });
 
     summaryCarAccessoryPrice();
@@ -292,8 +291,7 @@ $finance.forEach((radioBtn) => {
 
 $summaryBtn.addEventListener("click", () => {
   const carAccessoryPrice = parseInt($summaryPrice.value);
-  document.querySelector("#summaryPriceEnd\\.value").textContent =
-    carAccessoryPrice;
+  document.querySelector("#summaryPriceEnd\\.value").textContent = carAccessoryPrice;
 });
 
 // zapisywanie danych w localStorage po wpisaniu w input
@@ -324,7 +322,7 @@ financeInputs.forEach((input) => {
   });
 });
 
-function populateFormFromLocalStorage() {
+function formLocalStorage() {
   const fName = localStorage.getItem("fName");
   const phone = localStorage.getItem("phone");
   const dateD = localStorage.getItem("dateD");
@@ -348,7 +346,7 @@ function populateFormFromLocalStorage() {
 }
 
 window.addEventListener("load", () => {
-  populateFormFromLocalStorage();
+  formLocalStorage();
 });
 
 
@@ -357,25 +355,24 @@ window.addEventListener("load", () => {
 $summaryBtn.addEventListener("click", () => {
   let mistakes = [];
   
-  
   if ($fName.value === "") {
       mistakes.push("Proszę wprowadzić imię i nazwisko.");
-    } else if (!/^[A-Za-z]+\s[A-Za-z]+$/.test($fName.value)) {
+  } else if (!/^[A-Za-z]+\s[A-Za-z]+$/.test($fName.value)) {
       mistakes.push(`Proszę wpisać imię i nazwisko w formacie "imię 'spacja' nazwisko".`);
-    }
+  }
   
   if ($phone.value === "") {
       mistakes.push("Proszę wprowadzić numer telefonu.");
-    } else if (!/^[0-9]{9}$/.test($phone.value)) {
+  } else if (!/^[0-9]{9}$/.test($phone.value)) {
       mistakes.push("Numer telefonu musi mieć dokładnie 9 cyfr.");
-    }
+  }
 
   if ($dateD.value === "") {
     mistakes.push("Proszę wybierz datę dostawy.");
   }
   if (!document.querySelector('input[name="finance"]:checked')) {
       mistakes.push("Proszę wybrać sposób finansowania.");
-    }
+  }
 
   if (mistakes.length > 0) {
     event.preventDefault();
@@ -402,40 +399,21 @@ $summaryBtn.addEventListener("click", () => {
 
       $choseCar.textContent = `Wybrałeś: ${brand}, ${model}. Rok produkcji: ${year}.`;
     }
-});
-
+  });
 });
 
 $form.addEventListener("submit", (event) => {
   event.preventDefault();
   $summaryBtn.click();
-  });
-
-  $phone.addEventListener("input", (event) => {
-      event.target.value = event.target.value.replace(/[^0-9]/g, "");
-      if (event.target.value.length > 9) {
-      event.target.value = event.target.value.slice(0, 9);
-      }
-  });
-
-
-$summaryBtn.addEventListener("click", () => {
-  $header.style.display = "none";
-  $carsTable.style.display = "none";
-  $middle.style.display = "none";
-  
-  $summaryEnd.style.display = "block";
-
-  carAll.forEach((car) => {
-    if (car.classList.contains("carActive")) {
-      brand = car.querySelector("h3").textContent;
-      year = car.querySelector("p:nth-child(3) b").textContent;
-      model = car.querySelector("p:nth-child(4) b").textContent;
-
-      $choseCar.textContent = `Wybrałeś: ${brand}, ${model}. Rok produkcji: ${year}.`;
-    }
-  });
 });
+
+$phone.addEventListener("input", (event) => {
+  event.target.value = event.target.value.replace(/[^0-9]/g, "");
+  if (event.target.value.length > 9) {
+  event.target.value = event.target.value.slice(0, 9);
+  }
+});
+
 
 // warunek daty
 
