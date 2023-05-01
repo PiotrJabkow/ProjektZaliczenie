@@ -5,8 +5,22 @@ body {
   height: 100%;
 }
 
-#header, #headerText1,
-#headerText2 {
+#listView {
+  font-size: 2em;
+  background-color: rgb(156, 156, 237);
+  padding-left: 5px;
+  border: solid 2px black;
+  width: 100%;
+}
+
+#header {
+  width: 100%;
+  padding-left: 0px;
+  margin: 0;
+}
+
+
+#headerText1,#headerText2 {
   background-color: #e0a3a3;
   margin: 0;
   padding: 0;
@@ -14,6 +28,7 @@ body {
   display: block;
   width: 100%;
   height: 100%;
+  font-size: 1.5em;
 }
 
 h1 {
@@ -35,6 +50,11 @@ h1 {
   width: 50%;
   float: right;
   padding: 0;
+}
+
+#formView {
+  z-index: 999;
+  width: 50%;
 }
 
 .hidden {
@@ -104,7 +124,65 @@ h2{
 }
 
 #summaryEnd img {
-  height: 210px;
-  width: 210px;
+  height: 220px;
+  width: 220px;
   border: 3px solid #e0a3a3;
 }
+
+
+
+
+@media only screen and (max-width: 525px) {
+	
+	#headerText1,
+	#headerText2 {
+	  background-color: #839ab9;
+	  margin: 0;
+	  padding: 0;
+	  border: 0;
+	  display: block;
+	  width: 100%;
+	  height: 100%;
+	  font-size: 1em;
+	}
+
+	#listView {
+		font-size: 1em;
+		background-color: rgb(173, 178, 130);
+		padding-left: 2px;
+		border: solid 1px black;
+		width: 100%;
+	}
+
+	#carsTable div {
+		font-size: 10px;
+		padding-left: 2px;
+		border: solid 1px black;
+		height: 230px;
+		width: 100%;
+		display: block;
+		margin: 0;
+    }
+
+	#carsTable div img {
+		height: 35%;
+		width: 30%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 0;
+	}
+	
+	#formView {
+		font-size: 12px;
+		z-index: 999;
+		width: 30%;
+	}
+	
+	#summaryEnd img {
+ 		height: 130px;
+  		width: 130px;
+  		border: 1px solid #251818;
+	}
+
+  }
