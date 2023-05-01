@@ -1,5 +1,5 @@
 Autko..
-Projekt dotyczy zakupu auta. 
+Projekt dotyczy pokazowej strony zakupu auta. 
 
 Składa się z trzech stron: 
 - tabeli samochodów,
@@ -9,4 +9,3 @@ Składa się z trzech stron:
 Projekt w większości składa się z JavaScript, dodatkowo posiada:
 - localStorage,
 - validację w formularza.
-
