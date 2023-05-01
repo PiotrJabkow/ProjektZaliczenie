@@ -134,6 +134,11 @@ h2{
 
 @media only screen and (max-width: 525px) {
 	
+  h1 {
+    margin: 0;
+    padding: 3px;
+  }
+
 	#headerText1,
 	#headerText2 {
 	  background-color: #839ab9;
