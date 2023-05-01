@@ -227,36 +227,6 @@ const formSaved = JSON.parse(localStorage.getItem("formData"));
 }
 
 
-$form.addEventListener("submit", (event) => {
-  let mistakes = [];
-  if ($fName.value === "") {
-    mistakes.push("Proszę wpisać imię i nazwisko.");
-  }
-  if ($phone.value === "") {
-    mistakes.push("Proszę wprowadzić numer telefonu.");
-  }
-  if ($dateD.value === "") {
-    mistakes.push("Proszę wybierz datę dostawy.");
-  }
-  if (mistakes.length > 0) {
-    event.preventDefault();
-    let $mistakesParag = document.querySelector("#mistakes");
-    $mistakesParag.innerHTML = `Wystąpił błąd. <br /> ${mistakes.join(
-      "<br />"
-    )}`;
-  } else {
-    event.preventDefault();
-
-  }
-});
-
-$phone.addEventListener("input", (event) => {
-  event.target.value = event.target.value.replace(/[^0-9]/g, "");
-  if (event.target.value.length > 9) {
-    event.target.value = event.target.value.slice(0, 9);
-  }
-});
-
 
 // akcesoria, kwoty, zdjęcie
 
@@ -326,6 +296,129 @@ $summaryBtn.addEventListener("click", () => {
     carAccessoryPrice;
 });
 
+// zapisywanie danych w localStorage po wpisaniu w input
+
+$fName.addEventListener("input", () => {
+  if ($fName.value !== "" && /^[A-Za-z]+\s[A-Za-z]+$/.test($fName.value)) {
+    localStorage.setItem("fName", $fName.value);
+  }
+});
+
+$phone.addEventListener("input", () => {
+  if ($phone.value !== "" && /^[0-9]{9}$/.test($phone.value)) {
+    localStorage.setItem("phone", $phone.value);
+  }
+});
+
+$dateD.addEventListener("input", () => {
+  if ($dateD.value !== "") {
+    localStorage.setItem("dateD", $dateD.value);
+  }
+});
+
+const financeInputs = document.querySelectorAll('input[name="finance"]');
+financeInputs.forEach((input) => {
+  input.addEventListener("input", () => {
+    const finance = document.querySelector('input[name="finance"]:checked').value;
+    localStorage.setItem("finance", finance);
+  });
+});
+
+function populateFormFromLocalStorage() {
+  const fName = localStorage.getItem("fName");
+  const phone = localStorage.getItem("phone");
+  const dateD = localStorage.getItem("dateD");
+  const finance = localStorage.getItem("finance");
+
+  if (fName) {
+    $fName.value = fName;
+  }
+  if (phone) {
+    $phone.value = phone;
+  }
+  if (dateD) {
+    $dateD.value = dateD;
+  }
+  if (finance) {
+    const financeInput = document.querySelector(`input[value="${finance}"]`);
+    if (financeInput) {
+      financeInput.checked = true;
+    }
+  }
+}
+
+window.addEventListener("load", () => {
+  populateFormFromLocalStorage();
+});
+
+
+//błędy w formularzu
+
+$summaryBtn.addEventListener("click", () => {
+  let mistakes = [];
+  
+  
+  if ($fName.value === "") {
+      mistakes.push("Proszę wprowadzić imię i nazwisko.");
+    } else if (!/^[A-Za-z]+\s[A-Za-z]+$/.test($fName.value)) {
+      mistakes.push(`Proszę wpisać imię i nazwisko w formacie "imię 'spacja' nazwisko".`);
+    }
+  
+  if ($phone.value === "") {
+      mistakes.push("Proszę wprowadzić numer telefonu.");
+    } else if (!/^[0-9]{9}$/.test($phone.value)) {
+      mistakes.push("Numer telefonu musi mieć dokładnie 9 cyfr.");
+    }
+
+  if ($dateD.value === "") {
+    mistakes.push("Proszę wybierz datę dostawy.");
+  }
+  if (!document.querySelector('input[name="finance"]:checked')) {
+      mistakes.push("Proszę wybrać sposób finansowania.");
+    }
+
+  if (mistakes.length > 0) {
+    event.preventDefault();
+    let $mistakesParag = document.querySelector("#mistakes");
+    $mistakesParag.innerHTML = `Wystąpił błąd. <br /> ${mistakes.join(
+      "<br />"
+    )}`;
+  } 
+
+  else {
+    $header.style.display = "none";
+    $carsTable.style.display = "none";
+    $middle.style.display = "none";
+    $summaryEnd.style.display = "block";
+    $listView.style.display = "none";
+    localStorage.clear();
+  }
+
+  carAll.forEach((car) => {
+    if (car.classList.contains("carActive")) {
+      brand = car.querySelector("h3").textContent;
+      year = car.querySelector("p:nth-child(3) b").textContent;
+      model = car.querySelector("p:nth-child(4) b").textContent;
+
+      $choseCar.textContent = `Wybrałeś: ${brand}, ${model}. Rok produkcji: ${year}.`;
+    }
+});
+
+});
+
+$form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  $summaryBtn.click();
+  });
+
+  $phone.addEventListener("input", (event) => {
+      event.target.value = event.target.value.replace(/[^0-9]/g, "");
+      if (event.target.value.length > 9) {
+      event.target.value = event.target.value.slice(0, 9);
+      }
+  });
+
+
 $summaryBtn.addEventListener("click", () => {
   $header.style.display = "none";
   $carsTable.style.display = "none";
@@ -364,5 +457,4 @@ $backBtn.addEventListener("click", () => {
   });
   location.reload(true);
 });
-
 
