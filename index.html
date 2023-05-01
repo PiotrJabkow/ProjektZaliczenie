@@ -15,17 +15,17 @@
       </p>
       <p id="headerText2"></p>
     </header>
-    <nav>
-      <div id="listView" class="hidden">
-        
 
-      </div>
-    </nav>
+    <nav id="listView">
+      <label for="selectBrand"> <b>Wybierz markę pojazdu: </b></label>
+      <select id="selectBrand">
+          <option value="all">Wszystkie</option>
+      </select>
+  
+  </nav>
 
 
-   <section class="carsView">
-      <div id="carsTable" class="carDiv"></div>
-    </section>
+  <div id="carsTable" class="carDiv"></div>
 
 
     <div id="middle" class="hidden">
@@ -89,7 +89,7 @@
       </div>
 
       <div class="button">
-        <button id="backBtn" type="submit" value="back">
+        <button id="backBtn" type="button" value="back">
             Wróć do listy samachodów
         </button>
       </div>
