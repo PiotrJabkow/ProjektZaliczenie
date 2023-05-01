@@ -8,4 +8,4 @@ Składa się z trzech stron:
 
 Projekt w większości składa się z JavaScript, dodatkowo posiada:
 - localStorage,
-- validację w formularza.
+- validację formularza.
